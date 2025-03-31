@@ -1,26 +1,57 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="app">
+    <Game v-if="gameActive" @game-stopped="handleGameStop" />
+    <Stats 
+      v-else
+      :stats="stats"
+      :recentWords="recentWords"
+      @restart-game="restartGame"
+    />
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Game from './components/GameWeb.vue'
+import Stats from './components/StatsWeb.vue'
 
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
+  components: { Game, Stats },
+  data() {
+    return {
+      gameActive: true,
+      stats: { correct: 0, incorrect: 0 },
+      recentWords: []
+    }
+  },
+  methods: {
+    handleGameStop(stats, words) {
+      this.stats = stats
+      this.recentWords = words
+      this.gameActive = false
+    },
+    restartGame() {
+      this.gameActive = true
+      this.stats = { correct: 0, incorrect: 0 }
+      this.recentWords = []
+    }
   }
 }
 </script>
 
 <style>
+/* Global Styles */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  min-height: 100vh;
+  background: #E8BFE8;
+  padding: 2rem;
 }
 </style>
