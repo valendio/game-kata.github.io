@@ -1,6 +1,6 @@
 name = "game-kata"
 type = "javascript"
-account_id = "pBNoccXBFroyhDdnzyNHqhEA1dlKsyzniKTVltBT"
+account_id = "ee499347e77057f67e2066d061c5c6e3"
 compatibility_date = "2025-04-01"
 pages_build_output_dir = "./dist"
 
